@@ -1,35 +1,66 @@
 package com.base.knockknock.model;
 
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
-import org.joda.time.LocalDateTime;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 
 @Entity
 @Table(name = "user")
 @NoArgsConstructor
 public class User {
-    public User (String name) {
-        this.name = name;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @CreatedDate
-    @Generated(GenerationTime.INSERT)
+    @CreationTimestamp
     private LocalDateTime createdTime;
-    @LastModifiedDate
-    @Generated(GenerationTime.ALWAYS)
+    @UpdateTimestamp
     private LocalDateTime lastUpdate;
+    private String email;
+    private String password;
+    private Role role;
+
+    public User (String name) {
+        this.name = name;
+    }
+
+    public Long getId () {
+        return id;
+    }
+
+    public String getName () {
+        return name;
+    }
+
+    public LocalDateTime getCreatedTime () {
+        return createdTime;
+    }
+
+    public LocalDateTime getLastUpdate () {
+        return lastUpdate;
+    }
+
+    public String getEmail () {
+        return email;
+    }
+
+    public String getPassword () {
+        return password;
+    }
+
+    public void setName (String name) {
+        this.name = name;
+    }
+
+    public void setEmail (String email) {
+        this.email = email;
+    }
 }
